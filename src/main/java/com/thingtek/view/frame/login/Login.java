@@ -175,6 +175,7 @@ public class Login extends JFrame {
         shell.addItems(setPanel.init(), "设置");
 
 
+        
         setVisible(false);
         shell.setVisible(true);
     }
