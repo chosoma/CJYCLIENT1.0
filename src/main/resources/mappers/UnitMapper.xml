@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.thingtek.database.dao.UnitDAO">
+
+    <resultMap id="unitinfo" type="com.thingtek.database.domain.UnitBean">
+        <result property="snid" column="snid" javaType="java.lang.String"/>
+        <result property="pwd" column="pwd" javaType="java.lang.String"/>
+        <result property="soft" column="soft" javaType="java.lang.String"/>
+        <result property="hard" column="hard" javaType="java.lang.String"/>
+    </resultMap>
+    <resultMap id="unittask" type="com.thingtek.database.domain.UnitBean">
+        <result property="snid" column="snid" javaType="java.lang.String"/>
+        <result property="deep" column="deep" javaType="java.lang.Integer"/>
+        <result property="ringNum" column="ringNum" javaType="java.lang.Integer"/>
+        <result property="hard" column="measure" javaType="java.lang.Integer"/>
+        <result property="measurePeriod" column="speed" javaType="java.lang.Integer"/>
+        <result property="tcpAddr" column="tcpaddr" javaType="java.lang.String"/>
+        <result property="tcpPort" column="tcpport" javaType="java.lang.Integer"/>
+        <result property="ftpAddr" column="ftpaddr" javaType="java.lang.String"/>
+        <result property="ftpPort" column="ftpport" javaType="java.lang.Integer"/>
+        <result property="date" column="date" javaType="java.util.Date"/>
+    </resultMap>
+    <resultMap id="unit" type="com.thingtek.database.domain.UnitBean">
+        <result property="snid" column="snid" javaType="java.lang.String"/>
+        <result property="pwd" column="pwd" javaType="java.lang.String"/>
+        <result property="soft" column="soft" javaType="java.lang.String"/>
+        <result property="hard" column="hard" javaType="java.lang.String"/>
+        <result property="deep" column="deep" javaType="java.lang.Integer"/>
+        <result property="ringNum" column="ringNum" javaType="java.lang.Integer"/>
+        <result property="measurePeriod" column="measure" javaType="java.lang.Integer"/>
+        <result property="motorSpeed" column="speed" javaType="java.lang.Integer"/>
+        <result property="tcpAddr" column="tcpaddr" javaType="java.lang.String"/>
+        <result property="tcpPort" column="tcpport" javaType="java.lang.Integer"/>
+        <result property="ftpAddr" column="ftpaddr" javaType="java.lang.String"/>
+        <result property="ftpPort" column="ftpport" javaType="java.lang.Integer"/>
+        <result property="date" column="date" javaType="java.util.Date"/>
+    </resultMap>
+    <select id="findInfo" resultMap="unitinfo">
+        SELECT *
+        FROM unitinfo;
+    </select>
+
+    <select id="findTask" resultMap="unittask">
+        SELECT *
+        FROM unittask;
+    </select>
+
+    <!--<select id="find" resultMap="unit">-->
+    <!--SELECT *-->
+    <!--FROM unitinfo ui, unittask ut-->
+    <!--WHERE ui.snid = ut.snid-->
+    <!--ORDER BY date DESC LIMIT 1;-->
+    <!--</select>-->
+
+    <insert id="saveInfo" parameterType="com.thingtek.database.domain.UnitBean">
+        INSERT INTO unitinfo
+        (snid, pwd, softwareversion, hardwareversion)
+        VALUES
+            (
+                #{snid}, #{pwd}, #{soft}, #{hard}
+            );
+    </insert>
+
+    <insert id="saveTask" parameterType="com.thingtek.database.domain.UnitBean">
+        INSERT INTO unittask
+        (snid, deep, ringNum, measure, speed, tcpaddr, tcpport, ftpaddr, ftpport)
+        VALUES
+            (
+                #{snid},
+                #{pwd},
+                #{ringNum},
+                #{measurePeriod},
+                #{motorSpeed},
+                #{tcpAddr},
+                #{tcpPort},
+                #{ftpAddr},
+                #{ftpPort}
+            );
+    </insert>
+
+    <select id="checkUnit" parameterType="com.thingtek.database.domain.UnitBean" resultMap="unit">
+        SELECT
+            unitinfo.snid,
+            pwd,
+            softwareversion,
+            hardwareversion,
+            deep,
+            ringNum,
+            measure,
+            speed,
+            tcpaddr,
+            tcpport,
+            ftpaddr,
+            ftpport
+        FROM unitinfo
+            LEFT JOIN unittask ON unitinfo.snid = unittask.snid
+        WHERE unitinfo.snid = #{snid} AND unitinfo.pwd = #{pwd}
+        ORDER BY date DESC
+        LIMIT 1;
+    </select>
+    <select id="findBySn" resultMap="unit">
+        SELECT
+            unitinfo.snid,
+            pwd,
+            soft,
+            hard,
+            deep,
+            ringNum,
+            measure,
+            speed,
+            tcpaddr,
+            tcpport,
+            ftpaddr,
+            ftpport
+        FROM unitinfo
+            LEFT JOIN unittask ON unitinfo.snid = unittask.snid
+        WHERE unitinfo.snid = #{snid}
+        ORDER BY unitinfo.lasttime,unittask.lasttime DESC
+        LIMIT 1;
+    </select>
+
+    <select id="findSnids" resultType="java.lang.String">
+        SELECT snid FROM unitinfo
+    </select>
+
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="com.thingtek.factory.FontFactory">
+        <property name="fontMap">
+            <map>
+                <entry key="login">
+                    <bean class="java.awt.Font">
+                        <constructor-arg index="0" value="宋体"/>
+                        <constructor-arg index="1" value="0"/>
+                        <constructor-arg index="2" value="20"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+
+
+    </bean>
+
+</beans>

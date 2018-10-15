@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.thingtek.database.dao.UserDAO">
+
+    <select id="find" resultType="com.thingtek.database.domain.UserBean">
+        SELECT *
+        FROM user
+    </select>
+    <select id="findByUsername" parameterType="java.lang.String" resultType="com.thingtek.database.domain.UserBean">
+        SELECT *
+        FROM user
+        WHERE username = #{username}
+    </select>
+    <update id="updateByUsername" parameterType="com.thingtek.database.domain.UserBean">
+        UPDATE user
+        SET password = #{password}
+        WHERE username = #{username}
+    </update>
+    <insert id="save" parameterType="com.thingtek.database.domain.UserBean">
+        INSERT INTO user (username, password, authority) VALUES (
+            #{username},
+            #{password},
+            #{authority}
+        );
+    </insert>
+    <select id="check" parameterType="com.thingtek.database.domain.UserBean"
+            resultType="com.thingtek.database.domain.UserBean">
+        SELECT * FROM user
+        <where>
+            username = #{username} AND password = #{password}
+        </where>
+    </select>
+</mapper>

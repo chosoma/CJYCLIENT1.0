@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="GBK">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/thingtek/tools/MyUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/images/chart_48.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/images/database_48.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/images/home_48.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/images/set_48.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/images/table_48.png" charset="UTF-8" />
+    <file url="PROJECT" charset="GBK" />
+  </component>
+</project>

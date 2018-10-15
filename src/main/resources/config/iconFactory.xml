@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.thingtek.factory.IconFactory">
+        <property name="iconpathMap">
+            <map>
+                <entry key="主页" value="images/home_48.png"/>
+                <entry key="数据" value="images/database_48.png"/>
+                <entry key="设置" value="images/set_48.png"/>
+                <entry key="table" value="images/table_48.png"/>
+                <entry key="chart" value="images/chart_48.png"/>
+                <entry key="admin" value="images/admin.png"/>
+                <entry key="user" value="images/user.png"/>
+                <entry key="develop" value="images/develop.png"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

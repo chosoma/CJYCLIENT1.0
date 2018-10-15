@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.thingtek.config.AgreementConfig">
+        <property name="totalLength" value="15"/>
+        <property name="crcEndOff" value="-3"/>
+        <property name="crcStartOff" value="2"/>
+        <property name="head" value="0x7e"/>
+        <property name="tail" value="0x7d"/>
+        <property name="agreementVersion" value="1"/>
+        <property name="agreementVersionOff" value="1"/>
+        <property name="obligateOff" value="2"/>
+        <property name="obligateLength" value="7"/>
+        <property name="orderOff" value="9"/>
+        <property name="orderLength" value="2"/>
+        <property name="orderBackMap">
+            <map>
+                <entry key="0x1101" value="0x1101"/>
+                <entry key="0x1102" value="0x1102"/>
+                <entry key="0x1103" value="0x1103"/>
+                <entry key="0x1104" value="0x1104"/>
+                <entry key="0x2101" value="0x2101"/>
+                <entry key="0x2102" value="0x2102"/>
+                <entry key="0x2103" value="0x2103"/>
+            </map>
+        </property>
+        <property name="stateOff" value="11"/>
+        <property name="dataOff" value="12"/>
+        <property name="stateCodes">
+            <array>
+                <value>0</value>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>4</value>
+                <value>-1</value>
+            </array>
+        </property>
+        <property name="decripts">
+            <map>
+                <entry key="0x5e" value="0x7e"/>
+                <entry key="0x5d" value="0x7d"/>
+                <entry key="0x5c" value="0x7c"/>
+            </map>
+        </property>
+        <property name="encripts">
+            <map>
+                <entry key="0x7e" value="0x5e"/>
+                <entry key="0x7d" value="0x5d"/>
+                <entry key="0x7c" value="0x5c"/>
+            </map>
+        </property>
+        <property name="criptcode" value="0x7c"/>
+        <property name="idAuthentySnidLength" value="20"/>
+        <property name="idAuthentySnidOff" value="0"/>
+        <property name="idAuthentySoftLength" value="10"/>
+        <property name="idAuthentySoftOff" value="20"/>
+        <property name="idAuthentyHardLength" value="10"/>
+        <property name="idAuthentyHardOff" value="30"/>
+        <property name="idAuthentyPwdLength" value="50"/>
+        <property name="idAuthentyPwdOff" value="40"/>
+        <property name="idAuthentyStates">
+            <map>
+                <entry key="true" value="3"/>
+                <entry key="false" value="0"/>
+            </map>
+        </property>
+        <property name="dayLength" value="4"/>
+        <property name="uploadDataOff" value="0"/>
+        <property name="dataLength" value="48"/>
+        <property name="uploadTaskOff" value="48"/>
+        <property name="taskLength" value="40"/>
+        <property name="uploadFirstDayOff" value="88"/>
+        <property name="historyStateFlags">
+            <map>
+                <entry key="4" value="true"/>
+                <entry key="0" value="false"/>
+            </map>
+        </property>
+        <property name="historyFlagStates">
+            <map>
+                <entry key="true" value="0"/>
+                <entry key="false" value="4"/>
+            </map>
+        </property>
+        <property name="s2ghistoryStates">
+            <map>
+                <entry key="0" value="1"/>
+                <entry key="4" value="1"/>
+            </map>
+        </property>
+        <property name="historyDataStartOff" value="1"/>
+        <property name="historyNumOff" value="0"/>
+        <property name="historyOneDataLength" value="48"/>
+        <property name="startDayOff" value="0"/>
+        <property name="endDayOff" value="4"/>
+        <property name="ringNum" value="10"/>
+        <property name="ringOff" value="0"/>
+        <property name="ringOneLength" value="4"/>
+        <property name="batlvLength" value="4"/>
+        <property name="batlvOff" value="40"/>
+        <property name="dayOff" value="44"/>
+        <property name="deepOff" value="0"/>
+        <property name="deepLength" value="2"/>
+        <property name="ringnumOff" value="2"/>
+        <property name="ringnumLength" value="2"/>
+        <property name="periodOff" value="4"/>
+        <property name="periodLength" value="2"/>
+        <property name="speedOff" value="6"/>
+        <property name="speedLength" value="2"/>
+        <property name="tcpAddrOff" value="8"/>
+        <property name="tcpPortOff" value="16"/>
+        <property name="ftpAddrOff" value="18"/>
+        <property name="ftpPortOff" value="26"/>
+        <property name="portLength" value="2"/>
+        <property name="addrLength" value="8"/>
+    </bean>
+</beans>

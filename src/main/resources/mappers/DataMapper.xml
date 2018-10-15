@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.thingtek.database.dao.DataDAO">
+
+    <insert id="save" parameterType="com.thingtek.database.domain.DataBean">
+        INSERT INTO data
+        (snid, ring0, ring1, ring2, ring3, ring4, ring5, ring6, ring7, ring8, ring9, voltage, day)
+        VALUES
+        <foreach collection="list" item="data" open="(" close=")" separator="),(">
+            #{data.snid},
+            <foreach collection="data.rings" item="onering" separator="," close=",">
+                #{onering}
+            </foreach>
+            #{data.voltage},
+            #{data.day}
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        inserttime = now()
+    </insert>
+
+    <select id="findFirstDay" resultType="java.lang.Integer" parameterType="String">
+        SELECT data.day FROM data
+        <where>
+            <if test="_parameter!=null and _parameter!=''">
+                snid = #{snid}
+            </if>
+        </where>
+        ORDER BY data.day limit 1
+    </select>
+
+    <select id="findFirstData" resultType="java.util.Map" parameterType="String">
+        SELECT * FROM DATA
+        <where>
+            <if test="_parameter!=null and _parameter!=''">
+                snid = #{snid}
+            </if>
+        </where>
+        ORDER BY data.day ASC limit 1
+    </select>
+    <select id="findNewData" resultType="java.util.Map" parameterType="String">
+        SELECT * FROM DATA
+        <where>
+            <if test="_parameter!=null and _parameter!=''">
+                snid = #{snid}
+            </if>
+        </where>
+        ORDER BY data.day DESC limit 1
+    </select>
+    <select id="find" resultType="java.util.Map"
+            parameterType="com.thingtek.database.domain.EntityBean">
+        SELECT * FROM data
+        <where>
+            <if test="snid != null and snid != ''">
+                snid = #{snid}
+                <choose>
+                    <when test=" start != null and end != null ">
+                        AND data.day BETWEEN #{start} AND #{end}
+                    </when>
+                    <when test=" end!=null ">
+                        AND data.day &lt;=#{end}
+                    </when>
+                    <when test=" start!=null ">
+                        AND data.day &gt;=#{start}
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+    <select id="findDays" resultType="java.lang.Integer" parameterType="com.thingtek.database.domain.EntityBean">
+        SELECT DISTINCT day FROM data
+        <where>
+            <if test="snid!=null and snid!=''">
+                snid = #{snid}
+                <choose>
+                    <when test=" start != null and end != null ">
+                        AND data.day BETWEEN #{start} AND #{end}
+                    </when>
+                    <when test=" end!=null ">
+                        AND data.day &lt;=#{end}
+                    </when>
+                    <when test=" start!=null ">
+                        AND data.day &gt;=#{start}
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+</mapper>
