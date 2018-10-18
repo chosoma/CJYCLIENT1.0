@@ -5,6 +5,8 @@ import com.thingtek.database.domain.UnitBean;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class TableUnitPanel extends JPanel {
 
@@ -37,8 +39,12 @@ public class TableUnitPanel extends JPanel {
     private TableUnitLabel jlsnid;
 
     public void init() {
+        Color titleColor1 = new Color(0x8ABFED);
+        Color titleColor2 = new Color(0xB6D8F5);
+        Color dataColor = new Color(0xffffff);
 
         jlsnid = new TableUnitLabel("", JLabel.CENTER);
+        jlsnid.setBackground(dataColor);
         this.add(jlsnid, BorderLayout.NORTH);
         this.add(ringsPanel, BorderLayout.CENTER);
         TableUnitLabel[] jltitles = new TableUnitLabel[13];
@@ -52,83 +58,98 @@ public class TableUnitPanel extends JPanel {
         gbc.gridy = 0;
         for (TableUnitLabel jltitle : jltitles) {
             gbl.setConstraints(jltitle, gbc);
+            jltitle.setBackground(titleColor1);
             ringsPanel.add(jltitle);
-            gbc.gridy++;
+            gbc.gridx++;
         }
-        gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
+        gbc.gridx = 0;
         TableUnitLabel jltitleFirst = new TableUnitLabel("安装记录", JLabel.CENTER);
+        jltitleFirst.setBackground(titleColor2);
         gbl.setConstraints(jltitleFirst, gbc);
         ringsPanel.add(jltitleFirst);
-        gbc.gridx++;
+        gbc.gridy++;
         TableUnitLabel jltitleNew = new TableUnitLabel("测量数据", JLabel.CENTER);
+        jltitleNew.setBackground(titleColor2);
         gbl.setConstraints(jltitleNew, gbc);
         ringsPanel.add(jltitleNew);
-        gbc.gridx++;
+        gbc.gridy++;
         TableUnitLabel jltitleSub = new TableUnitLabel("沉降值", JLabel.CENTER);
+        jltitleSub.setBackground(titleColor2);
         gbl.setConstraints(jltitleSub, gbc);
         ringsPanel.add(jltitleSub);
-        gbc.gridx++;
+        gbc.gridy++;
 
         jlringsFirst = new TableUnitLabel[10];
         jlringsNew = new TableUnitLabel[10];
         jlringsSub = new TableUnitLabel[10];
 
         for (int i = 0; i < 10; i++) {
-            gbc.gridy++;
-            gbc.gridx = 1;
+            gbc.gridx++;
+            gbc.gridy = 1;
             jlringsFirst[i] = new TableUnitLabel("", JLabel.CENTER);
+            jlringsFirst[i].setBackground(dataColor);
             gbl.setConstraints(jlringsFirst[i], gbc);
             ringsPanel.add(jlringsFirst[i]);
-            gbc.gridx++;
+            gbc.gridy++;
             jlringsNew[i] = new TableUnitLabel("", JLabel.CENTER);
+            jlringsNew[i].setBackground(dataColor);
             gbl.setConstraints(jlringsNew[i], gbc);
             ringsPanel.add(jlringsNew[i]);
-            gbc.gridx++;
+            gbc.gridy++;
             jlringsSub[i] = new TableUnitLabel("", JLabel.CENTER);
+            jlringsSub[i].setBackground(dataColor);
             gbl.setConstraints(jlringsSub[i], gbc);
             ringsPanel.add(jlringsSub[i]);
         }
 
-        gbc.gridy++;
-        gbc.gridx = 1;
+        gbc.gridx++;
+        gbc.gridy = 1;
         jlbatlvFirst = new TableUnitLabel("", JLabel.CENTER);
+        jlbatlvFirst.setBackground(dataColor);
         gbl.setConstraints(jlbatlvFirst, gbc);
         ringsPanel.add(jlbatlvFirst);
-        gbc.gridx++;
+        gbc.gridy++;
         jlbatlvNew = new TableUnitLabel("", JLabel.CENTER);
+        jlbatlvNew.setBackground(dataColor);
         gbl.setConstraints(jlbatlvNew, gbc);
         ringsPanel.add(jlbatlvNew);
-        gbc.gridx++;
+        gbc.gridy++;
         TableUnitLabel nulllabel1 = new TableUnitLabel();
+        nulllabel1.setBackground(dataColor);
         gbl.setConstraints(nulllabel1, gbc);
         ringsPanel.add(nulllabel1);
-        gbc.gridy++;
-        gbc.gridx = 1;
+        gbc.gridx++;
+        gbc.gridy = 1;
         jldayFirst = new TableUnitLabel("", JLabel.CENTER);
+        jldayFirst.setBackground(dataColor);
         gbl.setConstraints(jldayFirst, gbc);
         ringsPanel.add(jldayFirst);
-        gbc.gridx++;
+        gbc.gridy++;
         jldayNew = new TableUnitLabel("", JLabel.CENTER);
+        jldayNew.setBackground(dataColor);
         gbl.setConstraints(jldayNew, gbc);
         ringsPanel.add(jldayNew);
-        gbc.gridx++;
+        gbc.gridy++;
         TableUnitLabel nulllabel2 = new TableUnitLabel();
+        nulllabel2.setBackground(dataColor);
         gbl.setConstraints(nulllabel2, gbc);
         ringsPanel.add(nulllabel2);
     }
 
 
     private void initFirst() {
-        jldayFirst.setText(String.valueOf(dataBeanFirst.get("day")));
-        jlbatlvFirst.setText(String.valueOf(dataBeanFirst.get("voltage")));
+        Object day = dataBeanFirst.get("day");
+        jldayFirst.setText(day instanceof Integer ? intday2date((Integer) day) : String.valueOf(day));
+//        jlbatlvFirst.setText(String.valueOf(dataBeanFirst.get("voltage")));
         for (int i = 0; unitBean.getRingNum() != null && i < unitBean.getRingNum(); i++) {
             jlringsFirst[i].setText(String.valueOf(dataBeanFirst.get("ring" + i)));
         }
     }
 
     private void initNew() {
-        jldayNew.setText(String.valueOf(dataBeanNew.get("day")));
+        Object day = dataBeanNew.get("day");
+        jldayNew.setText(day instanceof Integer ? intday2date((Integer) day) : String.valueOf(day));
         jlbatlvNew.setText(String.valueOf(dataBeanNew.get("voltage")));
         for (int i = 0; unitBean.getRingNum() != null && i < unitBean.getRingNum(); i++) {
             jlringsNew[i].setText(String.valueOf(dataBeanNew.get("ring" + i)));
@@ -159,8 +180,6 @@ public class TableUnitPanel extends JPanel {
         for (JLabel j : jlringsSub) {
             j.setText("");
         }
-
-
     }
 
 
@@ -179,8 +198,16 @@ public class TableUnitPanel extends JPanel {
         initNew();
     }
 
-    @Override
+    private String intday2date(int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, day / 10000 + 2000);
+        c.set(Calendar.MONTH, day % 10000 / 100 - 1);
+        c.set(Calendar.DAY_OF_MONTH, day % 100);
+        return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+    }
+
+/*    @Override
     public Dimension getPreferredSize() {
         return new Dimension(200, 280);
-    }
+    }*/
 }

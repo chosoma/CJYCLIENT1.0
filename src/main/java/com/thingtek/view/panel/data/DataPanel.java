@@ -21,7 +21,7 @@ import java.util.Vector;
 public class DataPanel extends BasePanel {
 
 
-    private JPanel toolPanel;
+//    private JPanel toolPanel;
 
     @Resource
     private TablePanel tablePanel;
@@ -32,7 +32,7 @@ public class DataPanel extends BasePanel {
 
     public DataPanel init() {
         setLayout(new BorderLayout());
-        initTool();
+//        initTool();
         initCenter();
         return this;
     }
@@ -43,8 +43,9 @@ public class DataPanel extends BasePanel {
     @Resource
     private UnitService unitService;
 
-    private void initTool() {
+    /*private void initTool() {
         toolPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        toolPanel.setBackground(Color.WHITE);
         JTextArea jtaSnid = new JTextArea("设备编号:");
         jtaSnid.setEnabled(false);
         jtaSnid.setOpaque(false);
@@ -87,7 +88,7 @@ public class DataPanel extends BasePanel {
         });
         toolPanel.add(search);
         add(toolPanel, BorderLayout.NORTH);
-    }
+    }*/
 
     private void initCenter() {
 
@@ -96,12 +97,17 @@ public class DataPanel extends BasePanel {
         center.add(tablePanel, JSplitPane.LEFT);
         center.add(chartPanel, JSplitPane.RIGHT);*/
 
-
-        tablePanel.init();
         chartPanel.init();
-        add(tablePanel, BorderLayout.WEST);
-        add(chartPanel, BorderLayout.CENTER);
-//        add(center, BorderLayout.CENTER);
+        tablePanel.init();
+        chartPanel.setBackground(Color.WHITE);
+        JSplitPane jSplitPane = new JSplitPane();
+        jSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+
+        jSplitPane.setDividerLocation(200);
+        jSplitPane.setBackground(Color.WHITE);
+        jSplitPane.setLeftComponent(tablePanel);
+        jSplitPane.setBottomComponent(chartPanel);
+        add(jSplitPane, BorderLayout.CENTER);
     }
 
 }

@@ -16,11 +16,16 @@ public class TableUnitLabel extends JLabel {
     }
 
     private void init() {
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        setBorder(BorderFactory.createLineBorder(new Color(0x7F9DB9),1));
+    }
+
+    @Override
+    public boolean isOpaque() {
+        return true;
     }
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(50,20);
+        return new Dimension(70, 20);
     }
 }

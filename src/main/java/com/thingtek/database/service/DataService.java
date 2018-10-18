@@ -52,7 +52,7 @@ public class DataService extends BaseService {
             dataBean.setOne(dataDAO.findFirstData(snid));
             dataBean.resolve();
         } catch (Exception e) {
-            e.printStackTrace();
+            log(e);
         }
         return dataBean;
     }
@@ -62,8 +62,9 @@ public class DataService extends BaseService {
         try {
             dataBean.setOne(dataDAO.findNewData(snid));
             dataBean.resolve();
+//            dataBean.getOne().put("voltage",0);
         } catch (Exception e) {
-            e.printStackTrace();
+            log(e);
         }
         return dataBean;
     }

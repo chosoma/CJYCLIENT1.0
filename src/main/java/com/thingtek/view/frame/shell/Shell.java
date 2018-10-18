@@ -31,7 +31,8 @@ public class Shell extends JFrame {
 
 
         titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        titlePanel.setBorder(BorderFactory.createLineBorder(Color.white, 1, false));
+        titlePanel.setBackground(Color.WHITE);
+        titlePanel.setBorder(BorderFactory.createLineBorder(Color.gray, 1, false));
 
         cardLayout = new CardLayout();
         centerPanel = new JPanel();

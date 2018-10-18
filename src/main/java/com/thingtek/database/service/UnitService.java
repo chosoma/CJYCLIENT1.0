@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UnitService extends BaseService {
@@ -30,6 +31,15 @@ public class UnitService extends BaseService {
     }
 
     public void saveTask(UnitBean unitBean) {
+    }
+
+    public List<UnitBean> getAll() {
+        try {
+            return unitDAO.findAll();
+        } catch (Exception e) {
+            log(e);
+            return new ArrayList<>();
+        }
     }
 
     public UnitBean getUnitBySnid(String snid) {

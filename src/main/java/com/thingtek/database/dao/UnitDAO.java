@@ -4,6 +4,7 @@ package com.thingtek.database.dao;
 import com.thingtek.database.domain.UnitBean;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UnitDAO {
 
@@ -16,6 +17,8 @@ public interface UnitDAO {
     List<UnitBean> findInfo() throws Exception;
 
     List<UnitBean> findTask() throws Exception;
+
+    List<UnitBean> findAll() throws Exception;
 
     UnitBean checkUnit(UnitBean unitBean) throws Exception;
 

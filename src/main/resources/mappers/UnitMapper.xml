@@ -45,6 +45,27 @@
         SELECT *
         FROM unittask;
     </select>
+    <select id="findAll" resultMap="unit">
+        SELECT
+            unitinfo.snid,
+            pwd,
+            soft,
+            hard,
+            deep,
+            ringNum,
+            measure,
+            speed,
+            tcpaddr,
+            tcpport,
+            ftpaddr,
+            ftpport
+        FROM unitinfo
+        LEFT JOIN (
+        SELECT snid,MAX(lasttime) lasttime FROM unittask GROUP BY snid
+        ) times ON unitinfo.snid = times.snid
+		LEFT JOIN unittask ON times.lasttime = unittask.lasttime AND times.snid = unittask.snid
+
+    </select>
 
     <!--<select id="find" resultMap="unit">-->
     <!--SELECT *-->

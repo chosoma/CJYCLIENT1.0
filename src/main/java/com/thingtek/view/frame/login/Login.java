@@ -24,10 +24,13 @@ public class Login extends JFrame {
 
     @Resource
     private Factorys factorys;
+
     @Resource
     private Shell shell;
+
     @Resource
     private AgreementConfig agreementConfig;
+
     @Resource
     private UserService userService;
 
@@ -96,7 +99,7 @@ public class Login extends JFrame {
         y += yheight;
 
         JButton jblogin = new JButton("登录");
-        addLogin(jblogin, x, y, lablewidth, labelheight);
+        addLogin(jblogin, x, y+10, lablewidth, labelheight);
         jblogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,7 +140,7 @@ public class Login extends JFrame {
         y += yheight;
 
         JButton jbcancel = new JButton("取消");
-        addLogin(jbcancel, x, y, lablewidth, labelheight);
+        addLogin(jbcancel, x, y+10, lablewidth, labelheight);
         jbcancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -175,7 +178,7 @@ public class Login extends JFrame {
         shell.addItems(setPanel.init(), "设置");
 
 
-        
+
         setVisible(false);
         shell.setVisible(true);
     }
