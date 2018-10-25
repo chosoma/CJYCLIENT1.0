@@ -1,21 +1,22 @@
 package com.thingtek.view.frame.login;
 
 import com.thingtek.config.AgreementConfig;
+import com.thingtek.config.SystemConfig;
 import com.thingtek.database.domain.UserBean;
 import com.thingtek.database.service.UserService;
 import com.thingtek.factory.Factorys;
-import com.thingtek.view.panel.data.DataPanel;
-import com.thingtek.view.panel.home.Home;
-import com.thingtek.view.panel.set.SetPanel;
+import com.thingtek.view.panel.BasePanel;
 import com.thingtek.view.frame.shell.Shell;
 
 import javax.annotation.Resource;
 import javax.swing.*;
+import javax.swing.plaf.RootPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
+import java.util.Set;
 
-@org.springframework.stereotype.Component
 public class Login extends JFrame {
 
     private JTextField jtfusername;
@@ -32,6 +33,9 @@ public class Login extends JFrame {
     private AgreementConfig agreementConfig;
 
     @Resource
+    private SystemConfig systemConfig;
+
+    @Resource
     private UserService userService;
 
     private JPanel jPanel;
@@ -39,23 +43,47 @@ public class Login extends JFrame {
     public void init() {
 
         setTitle("登录");
-        jPanel = new JPanel(new BorderLayout());
+
+        jPanel = new JPanel(new BorderLayout()) {
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                Color c1 = new Color(0xA4D7A9),
+                        c2 = new Color(0xB1E6B9);
+                g2.setPaint(new GradientPaint(0, 0, c1, 0, 30, c2));
+                g2.fillRect(0, 0, getWidth(), 30);
+                g2.setPaint(new GradientPaint(0, 30, c2, 0, (getHeight() - 44) / 2 + 30, c1));
+                g2.fillRect(0, 30, getWidth(), (getHeight() - 44) / 2 + 30);
+                g2.setPaint(new GradientPaint(0, (getHeight() - 44) / 2 + 30, c1, 0, getHeight() - 14, c2));
+                g2.fillRect(0, (getHeight() - 44) / 2 + 30, getWidth(), getHeight() - 14);
+                g2.setPaint(new GradientPaint(0, getHeight() - 14, c2, 0, getHeight(), c1));
+                g2.fillRect(0, getHeight() - 14, getWidth(), getHeight());
+                g2.dispose();
+                super.paintComponent(g2);
+            }
+
+            public boolean isOpaque() {
+                return false;
+            }
+        };
+//        jPanel.setBackground(new Color(0xDDCF22));
         this.setContentPane(jPanel);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(new Dimension(306, 200));
+        this.setSize(new Dimension(306, 230));
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
-        initTitle();
+        initTop();
         initCenter();
-
+        initBottom();
         setVisible(true);
 
     }
 
 
-    private void initTitle() {
-        JPanel logo = new JPanel();
+    private void initTop() {
+        JLabel logo = new JLabel(systemConfig.getProgrameName(), JLabel.LEFT);
+        logo.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
+        logo.setFont(factorys.getFontFactory().getFont("logo"));
         jPanel.add(logo, BorderLayout.NORTH);
     }
 
@@ -67,13 +95,23 @@ public class Login extends JFrame {
     private void initCenter() {
         cardLayout = new CardLayout();
         center = new JPanel(cardLayout);
+//        center.setBorder(BorderFactory.createLineBorder(Color.gray, 1, false));
+        center.setOpaque(false);
         jPanel.add(center, BorderLayout.CENTER);
         login = new JPanel(null);
+        login.setOpaque(false);
         loading = new JPanel(new BorderLayout());
+        loading.setOpaque(false);
         center.add(login, "login");
         center.add(loading, "load");
         initlogin();
         initloading();
+    }
+
+    private void initBottom() {
+        JLabel copyright = new JLabel(systemConfig.getCopyRight(), JLabel.CENTER);
+        copyright.setFont(factorys.getFontFactory().getFont("copyright"));
+        jPanel.add(copyright, BorderLayout.SOUTH);
     }
 
     private JProgressBar jpbProgress;
@@ -99,7 +137,8 @@ public class Login extends JFrame {
         y += yheight;
 
         JButton jblogin = new JButton("登录");
-        addLogin(jblogin, x, y+10, lablewidth, labelheight);
+        jblogin.setOpaque(false);
+        addLogin(jblogin, x, y + 10, lablewidth, labelheight);
         jblogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -140,7 +179,8 @@ public class Login extends JFrame {
         y += yheight;
 
         JButton jbcancel = new JButton("取消");
-        addLogin(jbcancel, x, y+10, lablewidth, labelheight);
+        jbcancel.setOpaque(false);
+        addLogin(jbcancel, x, y + 10, lablewidth, labelheight);
         jbcancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -157,27 +197,41 @@ public class Login extends JFrame {
     }
 
 
-    @Resource
+    /*@Resource
     private Home home;
     @Resource
     private DataPanel dataPanel;
     @Resource
-    private SetPanel setPanel;
+    private SetPanel setPanel;*/
+
+    public void setBases(Map<String, BasePanel> bases) {
+        this.bases = bases;
+    }
+
+    private Map<String, BasePanel> bases;
 
     private void loading() {
 
         shell.init();
 
-        jpbProgress.setValue(25);
-        shell.addItems(home.init(), "主页");
+        int startVal = 0;
+        int plus = 100 / (bases.size() != 0 ? bases.size() : 1);
 
+        Set<Map.Entry<String, BasePanel>> entries = bases.entrySet();
+
+        for (Map.Entry<String, BasePanel> entry : entries) {
+            jpbProgress.setValue(startVal);
+            shell.addItems(entry.getValue().init(), entry.getKey());
+            startVal += plus;
+        }
+
+
+        /*jpbProgress.setValue(25);
+        shell.addItems(home.init(), "主页");
         jpbProgress.setValue(50);
         shell.addItems(dataPanel.init(), "数据");
-
         jpbProgress.setValue(75);
-        shell.addItems(setPanel.init(), "设置");
-
-
+        shell.addItems(setPanel.init(), "设置");*/
 
         setVisible(false);
         shell.setVisible(true);
@@ -199,4 +253,13 @@ public class Login extends JFrame {
         return str != null && str.equals("");
     }
 
+    @Override
+    public Dimension getMinimumSize() {
+        return new Dimension(800, 600);
+    }
+
+    @Override
+    public void paintComponents(Graphics g) {
+
+    }
 }

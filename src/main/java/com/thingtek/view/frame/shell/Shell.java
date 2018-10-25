@@ -1,5 +1,6 @@
 package com.thingtek.view.frame.shell;
 
+import com.thingtek.config.SystemConfig;
 import com.thingtek.factory.Factorys;
 import com.thingtek.tools.TitleButton;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,9 @@ public class Shell extends JFrame {
     @Resource
     private Factorys factorys;
 
+    @Resource
+    private SystemConfig systemConfig;
+
     private JPanel titlePanel;
 
     private JPanel centerPanel;
@@ -27,8 +31,9 @@ public class Shell extends JFrame {
     private CardLayout cardLayout;
 
     public void init() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle(systemConfig.getProgrameName());
 
         titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         titlePanel.setBackground(Color.WHITE);
@@ -45,6 +50,7 @@ public class Shell extends JFrame {
         container.add(titlePanel, BorderLayout.NORTH);
 
         container.add(centerPanel, BorderLayout.CENTER);
+
     }
 
 

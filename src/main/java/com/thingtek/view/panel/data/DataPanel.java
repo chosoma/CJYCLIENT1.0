@@ -1,8 +1,5 @@
 package com.thingtek.view.panel.data;
 
-import com.thingtek.database.domain.DataBean;
-import com.thingtek.database.domain.EntityBean;
-import com.thingtek.database.domain.UnitBean;
 import com.thingtek.database.service.DataService;
 import com.thingtek.database.service.UnitService;
 import com.thingtek.view.panel.BasePanel;
@@ -13,9 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Vector;
+
 
 @Component
 public class DataPanel extends BasePanel {
@@ -37,11 +32,11 @@ public class DataPanel extends BasePanel {
         return this;
     }
 
-    private JComboBox<String> jcbSnids;
+   /* private JComboBox<String> jcbSnids;
     @Resource
     private DataService dataService;
     @Resource
-    private UnitService unitService;
+    private UnitService unitService;*/
 
     /*private void initTool() {
         toolPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));

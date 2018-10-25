@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="com.thingtek.view.frame.login.Login">
+        <property name="bases">
+            <map>
+                <entry key="主　　页" value-ref="home"/>
+                <entry key="数据查询" value-ref="dataPanel"/>
+                <entry key="数据管理" value-ref="dataManagerPanel"/>
+                <entry key="系统设置" value-ref="setPanel"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean class="com.thingtek.config.SystemConfig">
+        <property name="programeName" value="沉降检测系统"/>
+        <property name="logoinfo" value=""/>
+        <property name="copyRight" value="®copyright 无锡讯泰科技有限公司"/>
+    </bean>
+
+</beans>

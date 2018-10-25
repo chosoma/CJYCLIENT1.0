@@ -15,6 +15,7 @@ public class TableUnitPanel extends JPanel {
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
         ringsPanel = new JPanel(gbl);
+        ringsPanel.setOpaque(false);
     }
 
     private GridBagLayout gbl;
@@ -210,4 +211,9 @@ public class TableUnitPanel extends JPanel {
     public Dimension getPreferredSize() {
         return new Dimension(200, 280);
     }*/
+
+    @Override
+    public boolean isOpaque() {
+        return false;
+    }
 }

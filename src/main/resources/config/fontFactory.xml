@@ -14,6 +14,20 @@
                         <constructor-arg index="2" value="20"/>
                     </bean>
                 </entry>
+                <entry key="logo">
+                    <bean class="java.awt.Font">
+                        <constructor-arg index="0" value="黑体"/>
+                        <constructor-arg index="1" value="0"/>
+                        <constructor-arg index="2" value="20"/>
+                    </bean>
+                </entry>
+                <entry key="copyright">
+                    <bean class="java.awt.Font">
+                        <constructor-arg index="0" value="宋体"/>
+                        <constructor-arg index="1" value="0"/>
+                        <constructor-arg index="2" value="12"/>
+                    </bean>
+                </entry>
             </map>
         </property>
 

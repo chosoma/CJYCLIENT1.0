@@ -6,9 +6,10 @@
     <bean class="com.thingtek.factory.IconFactory">
         <property name="iconpathMap">
             <map>
-                <entry key="主页" value="images/home_48.png"/>
-                <entry key="数据" value="images/database_48.png"/>
-                <entry key="设置" value="images/set_48.png"/>
+                <entry key="主　　页" value="images/home_48.png"/>
+                <entry key="数据查询" value="images/chart_48.png"/>
+                <entry key="数据管理" value="images/database_48.png"/>
+                <entry key="系统设置" value="images/set_48.png"/>
                 <entry key="table" value="images/table_48.png"/>
                 <entry key="chart" value="images/chart_48.png"/>
                 <entry key="admin" value="images/admin.png"/>
