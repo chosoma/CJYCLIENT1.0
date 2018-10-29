@@ -15,6 +15,22 @@
         </property>
     </bean>
 
+    <bean name="setPanel" class="com.thingtek.view.panel.set.SetPanel">
+        <property name="setPanels">
+            <map>
+                <entry key="单 元 设 置">
+                    <bean class="com.thingtek.view.panel.set.setComponent.UnitPanel"/>
+                </entry>
+                <entry key="密 码 修 改">
+                    <bean class="com.thingtek.view.panel.set.setComponent.PwdPanel"/>
+                </entry>
+                <entry key="用 户 管 理">
+                    <bean class="com.thingtek.view.panel.set.setComponent.UserPanel"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
     <bean class="com.thingtek.config.SystemConfig">
         <property name="programeName" value="沉降检测系统"/>
         <property name="logoinfo" value=""/>
